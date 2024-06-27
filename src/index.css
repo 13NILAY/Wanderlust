@@ -1,0 +1,55 @@
+body{
+  font-family: "Plus Jakarta Sans",sans-serif !important;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.container{
+  flex: 1;
+}
+.card{
+  border: none !important;
+  margin-bottom: 2rem;
+}
+.card-deck{
+  display: flex;
+  justify-content: space-evenly;
+}
+.card-img-top {
+  border-radius: 1rem !important;
+  width: 100% !important;
+  object-fit: cover !important;
+}
+
+.card-body{
+  padding: 0 !important;
+}
+
+.card-text p{
+  font-weight: 400;
+}
+
+.card-img-overlay{
+  opacity: 0;
+}
+.card-img-overlay:hover{
+  opacity: 0.2;
+  background-color: white;
+}
+
+.add-btn,.edit-btn{
+  background-color: #fe424d !important;
+  border: none !important;
+}
+
+.small-img {
+  display: flex;
+  justify-content: center;
+  max-width: 90%;
+  max-height: 24rem;
+  width: auto;
+  height: auto;
+  object-fit: cover; /* Ensures the image fits within the specified dimensions */
+}
+
+
