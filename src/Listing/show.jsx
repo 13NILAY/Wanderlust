@@ -66,7 +66,7 @@ const Show = () => {
       }
 
       // After successful deletion, navigate back to the listings page
-      navigate('/listing');
+      navigate('');
     } catch (error) {
       console.log('Error:', error);
     }

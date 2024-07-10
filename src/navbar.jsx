@@ -14,8 +14,8 @@ const Navbar = () => {
     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div className="navbar-nav">
         <a className="nav-link" href="/">Home</a>
-        <a className="nav-link" href="/listing">All Listings</a>
-        <a className="nav-link" href="/listing/new">Add New Listing</a>
+        <a className="nav-link" href="">All Listings</a>
+        <a className="nav-link" href="/new">Add New Listing</a>
       </div>
     </div>
   </div>

@@ -16,11 +16,11 @@ const App = () => {
         <Router>
           <Routes>
              {/*Listing routes*/}
-             <Route path='/listing/' element={<Listings/>}/>
-             <Route path='/listing/new' element={<New/>}/>
+             <Route path='/' element={<Listings/>}/>
+             <Route path='/new' element={<New/>}/>
 
-             <Route path='/listing/:id' element={<Show/>}/>
-             <Route path='/listing/:id/edit' element={<Edit/>}/>
+             <Route path='/:id' element={<Show/>}/>
+             <Route path='/:id/edit' element={<Edit/>}/>
           </Routes>
         </Router>
     </div>

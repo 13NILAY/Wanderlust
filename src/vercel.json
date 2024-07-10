@@ -1,6 +1,0 @@
-{
-    "redirects": [
-      { "source": "/listing", "destination": "/", "permanent": true }
-    ]
-  }
-  

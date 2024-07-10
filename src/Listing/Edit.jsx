@@ -68,7 +68,7 @@ const Edit = () => {
           setShowAlert(true);
         }else{
           setTimeout(() => {
-            navigate(`/listing/${listing._id}`);
+            navigate(`/${listing._id}`);
         }, 2000);
         }
       
