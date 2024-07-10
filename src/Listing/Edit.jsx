@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { useLocation ,useNavigate} from 'react-router-dom';
 import Navbar from '../navbar';
 import Footer from '../footer';
-
+import AlertError from '../AlertError';
 const Edit = () => {
+  const [error, setError] = useState({
+    message: "",
+    status: "",
+  });
+  const [showAlert, setShowAlert] = useState(false);
   const location = useLocation();
   const navigate=useNavigate();
   const { listing } = location.state || {};
@@ -39,9 +44,12 @@ const Edit = () => {
       }));
     }
   };
-
+  const handleClick=()=>{
+    setShowAlert(false);
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log(event);
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
@@ -54,25 +62,32 @@ const Edit = () => {
           },
           body: JSON.stringify(newListing),
         });
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
         const result = await response.json();
-        console.log(result);
+        if(response.status>=400 && response.status<=510){
+          setError({message:result.message});
+          setShowAlert(true);
+        }else{
+          setTimeout(() => {
+            navigate(`/listing/${listing._id}`);
+        }, 2000);
+        }
+      
         // You can redirect or clear the form here if needed
       } catch (error) {
         console.log(error);
       }
     }
     setValidated(true);
-    navigate("/listing");
+  
+  
   };
 
   return (
     <>
       <Navbar />
+      {showAlert? <div><AlertError message={error.message} />
+        <button onClick={handleClick} className="btn btn-dark add-btn offset-6" type="submit">OK</button>
+      </div>:
       <div className="row mt-3">
         <div className="col-8 offset-2">
           <h3>Edit your Listing</h3>
@@ -128,7 +143,7 @@ const Edit = () => {
                   name="price"
                   value={newListing.price}
                   onChange={handleChange}
-                  type="number"
+                  type="text"
                   className="form-control"
                   required
                 />
@@ -168,7 +183,8 @@ const Edit = () => {
             <button className="btn btn-dark edit-btn mb-3" type="submit">Edit</button>
           </form>
         </div>
-      </div>
+      </div>}
+      <br />
       <Footer />
     </>
   );

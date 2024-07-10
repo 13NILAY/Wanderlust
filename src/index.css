@@ -7,7 +7,7 @@ body{
 .container{
   flex: 1;
 }
-.card{
+.listing-card{
   border: none !important;
   margin-bottom: 2rem;
 }

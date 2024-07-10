@@ -8,6 +8,7 @@ const Listings = () => {
   const navigate = useNavigate();
 
   const handleClick = (id) => {
+    
     navigate(`${id}`);
   };
 
@@ -16,6 +17,7 @@ const Listings = () => {
       try {
         const response = await fetch('http://localhost:8080/listing', {
           method: 'GET',
+          // credentials: 'include',
           headers: {
             'Content-Type': 'application/json',
           },
@@ -38,9 +40,9 @@ const Listings = () => {
         
         {listing.map((list) => (
           <div
-            key={list._id}
-            className="card"
-            onClick={() => handleClick(list._id)} // Fixed the onClick syntax
+            key={list._id }
+            className="listing-card card"
+            onClick={()=> handleClick(list._id)} 
             style={{ cursor: 'pointer'}}
           >
             <img src={list.image.url} className="card-img-top" alt={list.title} style={{ height: '20rem' }} />

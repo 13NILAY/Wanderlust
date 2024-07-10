@@ -5,6 +5,7 @@ import Footer from '../footer';
 
 const Show = () => {
   const { id } = useParams();
+  console.log(id);
   const navigate = useNavigate();
   const [listing, setListing] = useState(null);
   const [rating, setRating] = useState(3); // Default rating value
@@ -34,9 +35,9 @@ const Show = () => {
         body: JSON.stringify(reviewData),
       });
 
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+      // if (!response.ok) {
+      //   throw new Error('Network response was not ok');
+      // }
 
       const result = await response.json();
       console.log(result);
@@ -70,7 +71,27 @@ const Show = () => {
       console.log('Error:', error);
     }
   };
+  const handleDeleteReview= async (reviewId) => {
+    try {
+      const response = await fetch(`http://localhost:8080/listing/${id}/reviews/${reviewId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      console.log(response);
+      if (!response.ok) {
+        throw new Error('Failed to delete the listing');
+      }
+      fetchListing();
+    
 
+      // After successful deletion, navigate back to the listings page
+      
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
   const fetchListing = async () => {
     try {
       const response = await fetch(`http://localhost:8080/listing/${id}`, {
@@ -98,7 +119,7 @@ const Show = () => {
         <div className="row">
           <div className="col-8 offset-2">
             {listing && (
-              <div className="card">
+              <div className="listing-card card">
                 <h2>{listing.title}</h2>
                 <img src={listing.image.url} className="img-fluid card-img-top show-img small-img" alt="Listing" />
                 <div className="card-body m-2">
@@ -157,7 +178,27 @@ const Show = () => {
               </div>
               <button type="submit" className="btn btn-outline-dark mb-3">Submit</button>
             </form>
+            <hr />
+            <h4>All Reviews</h4>
+            <div className="row">
+            {listing && listing.reviews.length > 0 ? (
+              listing.reviews.map((review, index) => (
+                <div key={index} className='card col-5 ms-3 mb-3'>
+                  <div className='card-body'>
+                    <h5 className="card-title">Jane Doe</h5>
+
+                  <p className='card-text'>Rating: {review.rating} stars </p>
+                  <p className='card-text'>Comment: {review.comment}</p>
+                  <button onClick={()=>handleDeleteReview(review._id)} className='btn btn-dark btn-sm mb-3'>Delete</button>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p>No reviews yet.</p>
+            )}
+            </div>
           </div>
+          
         </div>
       </div>
       <Footer />

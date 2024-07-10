@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
 import Navbar from '../navbar';
 import Footer from '../footer';
+import AlertError from '../AlertError';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+
+
 
 const New = () => {
+  const [error, setError] = useState({
+    message: "",
+    status: "",
+  });
+  const [showAlert, setShowAlert] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -35,7 +45,9 @@ const New = () => {
       }));
     }
   };
-
+  const handleClick=()=>{
+    setShowAlert(false);
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
     const form = event.currentTarget;
@@ -50,27 +62,30 @@ const New = () => {
           },
           body: JSON.stringify(formData),
         });
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
         const result = await response.json();
+        if(response.status>=400 && response.status<=510){
+          setError({message:result.message});
+          setShowAlert(true);
+        }
         console.log(result);
-        // You can redirect or clear the form here if needed
       } catch (error) {
         console.error('Error submitting the form:', error);
       }
     }
     setValidated(true);
-  };
-
+   
+  }
   return (
     <>
       <Navbar />
+      {showAlert? <div><AlertError message={error.message} />
+        <button onClick={handleClick} className="btn btn-dark add-btn offset-6" type="submit">OK</button>
+      </div>:
       <div style={{ margin: '1rem' }} className="row">
+      
         <div className="col-8 offset-2">
-          <h3>Create a New Listing</h3>
+        <h3>Create a New Listing</h3>
+        
           <form onSubmit={handleSubmit} noValidate className={`needs-validation ${validated ? 'was-validated' : ''}`}>
             <div className="mb-3">
               <label htmlFor="title" className="form-label">Title</label>
@@ -113,8 +128,11 @@ const New = () => {
                 value={formData.image.url}
                 className="form-control"
                 onChange={handleChange}
-                
               />
+              <div className="invalid-feedback">
+                  Please enter a valid image URL.
+                </div>
+
               
             </div>
             <div className="row">
@@ -167,7 +185,7 @@ const New = () => {
             <button className="btn btn-dark add-btn" type="submit">Add</button>
           </form>
         </div>
-      </div>
+      </div>}
       <br />
       <Footer />
     </>
