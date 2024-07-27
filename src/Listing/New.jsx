@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Navbar from '../navbar';
 import Footer from '../footer';
 import AlertError from '../AlertError';
@@ -8,6 +8,7 @@ import { faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 
 
 const New = () => {
+  
   const [error, setError] = useState({
     message: "",
     status: "",
@@ -77,10 +78,12 @@ const New = () => {
   }
   return (
     <>
-      <Navbar />
-      {showAlert? <div><AlertError message={error.message} />
-        <button onClick={handleClick} className="btn btn-dark add-btn offset-6" type="submit">OK</button>
-      </div>:
+      {/* <Navbar /> */}
+      <div>
+            {showAlert? <div><AlertError message={error.message} />
+        <button onClick={handleClick} className="btn btn-dark add-btn offset-6  " type="submit">OK</button>
+        </div>:""}
+      </div>
       <div style={{ margin: '1rem' }} className="row">
       
         <div className="col-8 offset-2">
@@ -185,9 +188,9 @@ const New = () => {
             <button className="btn btn-dark add-btn" type="submit">Add</button>
           </form>
         </div>
-      </div>}
+      </div>
       <br />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

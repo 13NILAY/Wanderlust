@@ -84,7 +84,7 @@ const Edit = () => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       {showAlert? <div><AlertError message={error.message} />
         <button onClick={handleClick} className="btn btn-dark add-btn offset-6" type="submit">OK</button>
       </div>:
@@ -185,7 +185,7 @@ const Edit = () => {
         </div>
       </div>}
       <br />
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };

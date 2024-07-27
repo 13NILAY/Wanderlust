@@ -114,7 +114,7 @@ const Show = () => {
 
   return (
     <div>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="container mt-4">
         <div className="row">
           <div className="col-8 offset-2">
@@ -201,7 +201,7 @@ const Show = () => {
           
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };

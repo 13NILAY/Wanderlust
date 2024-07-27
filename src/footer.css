@@ -5,7 +5,7 @@
 .f-info-links a:hover{
     text-decoration: underline;
 }
-.f-info-socials,.f-info-links{
+.f-info-socials,.f-info-links, .f-info{
      width:100%;
      display: flex;
      align-items: center;

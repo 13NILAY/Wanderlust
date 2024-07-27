@@ -4,6 +4,15 @@ import Navbar from '../navbar';
 import Footer from '../footer';
 
 const Listings = () => {
+  const [error, setError] = useState({
+    message: "",
+    status: "",
+  });
+  const handleClickError=()=>{
+      setShowAlert(false);
+      navigate("/login");
+    }
+  const [showAlert, setShowAlert] = useState(false);
   const [listing, setListing] = useState([]);
   const navigate = useNavigate();
 
@@ -34,7 +43,11 @@ const Listings = () => {
 
   return (
     <>
-      <Navbar />
+      <div>
+            {showAlert? <div><AlertError message={error.message} />
+        <button onClick={handleClickError} className="btn btn-dark add-btn offset-6  " type="submit">OK</button>
+        </div>:""}
+        </div>
       <h2 className='m-3'>All Listings</h2>
       <div className="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 m-3">
         
@@ -57,7 +70,7 @@ const Listings = () => {
           </div>
         ))}
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
